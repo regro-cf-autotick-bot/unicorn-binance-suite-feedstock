@@ -7,20 +7,20 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/unicorn-binance-suite-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/unicorn-binance-suite-{{ version }}.tar.gz
   sha256: 55c4d57cb251d76f17cf06fd74d7d1ad22ec12e39948153a5448b4e20d1e06dc
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
     - pip
-    - python >=3.7
+    - python {{ python_min }}
   run:
-    - python >=3.7
+    - python >={{ python_min }}
     - unicorn-binance-local-depth-cache
     - unicorn-binance-rest-api
     - unicorn-binance-trailing-stop-loss
@@ -38,6 +38,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://www.lucit.tech/unicorn-binance-suite.html
